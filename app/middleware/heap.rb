@@ -49,7 +49,7 @@ class Heap
   end
 
   def self._track_once(env_id, user_id, session_id, pageview_id, ses_props, type, properties)
-    uri = URI("http://heapanalytics.com/api/track/8253958574")
+    uri = URI("http://heapanalytics.com/api/integrations/sessiontrack/8253958574")
     body = {
       "app_id": env_id,
       "user_id": user_id,
