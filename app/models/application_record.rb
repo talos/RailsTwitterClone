@@ -34,18 +34,27 @@ class ActiveRecord::Base
       name = self.class.name
       attributes = self.attributes
       Rails.logger.debug "created a #{name} with attributes #{attributes}!"
+
+      properties = attributes.merge "object_type" => name
+      Heap.track "created", properties
     end
 
     def after_commit_destroy
       name = self.class.name
       attributes = self.attributes
       Rails.logger.debug "destroyed a #{name} with attributes #{attributes}!"
+
+      properties = attributes.merge "object_type" => name
+      Heap.track "destroyed", properties
     end
 
     def after_commit_update
       name = self.class.name
       attributes = self.attributes
       Rails.logger.debug "updated a #{name} with attributes #{attributes}!"
+
+      properties = attributes.merge "object_type" => name
+      Heap.track "updated", properties
     end
 end
 
