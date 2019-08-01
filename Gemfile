@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 # Experimental heap
-gem "heap", '~> 1.2.0', git: "https://github.com/talos/heap-ruby.git"
+gem "heap", '~> 1.3.0', git: "https://github.com/talos/heap-ruby.git"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 5.2.3"
