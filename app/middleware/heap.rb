@@ -1,6 +1,7 @@
 # frozen_string_literal: true
+require 'heap'
 
-class Heap
+class HeapMiddleware
   def initialize(app)
     @app = app
   end
@@ -22,7 +23,7 @@ class Heap
     # :KLUDGE: assuming 1:1 relation between thread and request lifecycle
     Thread.current[:heap_context] = heap_context
 
-    Heap.track "http_request", "path" => env["REQUEST_URI"]
+    HeapMiddleware.track "http_request", "path" => env["REQUEST_URI"]
 
     @status, @headers, @response = @app.call(env)
 
@@ -44,23 +45,7 @@ class Heap
 
       properties = event_props.merge custom_props
 
-      Heap._track_once env_id, user_id, session_id, pageview_id, ses_props || {}, type, properties
+      Heap.session_track env_id, user_id, session_id, pageview_id, ses_props || {}, type, properties
     end
-  end
-
-  def self._track_once(env_id, user_id, session_id, pageview_id, ses_props, type, properties)
-    uri = URI("http://heapanalytics.com/api/integrations/sessiontrack/8253958574")
-    body = {
-      "app_id": env_id,
-      "user_id": user_id,
-      "session_id": session_id,
-      "pageview_id": pageview_id,
-      "ses_props": ses_props,
-      "event" => type,
-      "properties" => properties
-    }.to_json
-    Rails.logger.debug(body)
-    res = Net::HTTP.post uri, body, "Content-Type" => "application/json"
-    Rails.logger.debug(res)
   end
 end

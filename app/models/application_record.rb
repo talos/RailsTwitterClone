@@ -36,7 +36,7 @@ class ActiveRecord::Base
       Rails.logger.debug "created a #{name} with attributes #{attributes}!"
 
       properties = attributes.merge "object_type" => name
-      Heap.track "created", properties
+      HeapMiddleware.track "created", properties
     end
 
     def after_commit_destroy
@@ -45,7 +45,7 @@ class ActiveRecord::Base
       Rails.logger.debug "destroyed a #{name} with attributes #{attributes}!"
 
       properties = attributes.merge "object_type" => name
-      Heap.track "destroyed", properties
+      HeapMiddleware.track "destroyed", properties
     end
 
     def after_commit_update
@@ -54,7 +54,7 @@ class ActiveRecord::Base
       Rails.logger.debug "updated a #{name} with attributes #{attributes}!"
 
       properties = attributes.merge "object_type" => name
-      Heap.track "updated", properties
+      HeapMiddleware.track "updated", properties
     end
 end
 
