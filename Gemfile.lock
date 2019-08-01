@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/talos/heap-ruby.git
-  revision: d8d85cd2c6b284ebb926606aca0555ac3b8edad4
+  revision: b67167cd4526e4fb9489c5a5c6a7653fcab42602
   specs:
-    heap (1.1.1)
+    heap (1.2.0)
       faraday (>= 0.8.11)
       faraday_middleware (>= 0.8.0)
 
@@ -300,7 +300,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   font-awesome-sass (~> 4.3)
-  heap (~> 1.1.1)!
+  heap (~> 1.2.0)!
   jquery-rails
   listen
   pry-byebug

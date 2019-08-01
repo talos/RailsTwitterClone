@@ -1,5 +1,4 @@
 require_relative 'boot'
-require_relative '../app/middleware/heap'
 
 require 'rails/all'
 
@@ -17,6 +16,6 @@ module RailsTwitterClone
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
-    config.middleware.use HeapMiddleware
+    config.middleware.use HeapAPI::Middleware
   end
 end
